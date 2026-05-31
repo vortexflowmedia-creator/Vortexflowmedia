@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — VortexFlow Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07070d;--bg2:#0b0b14;
+  --surface:rgba(255,255,255,0.04);--surface-hover:rgba(255,255,255,0.08);
+  --glass:rgba(255,255,255,0.06);--glass-border:rgba(255,255,255,0.08);
+  --text:#f0f0f5;--text-muted:#8888a0;--text-dim:#55556a;
+  --accent1:#7c3aed;--accent2:#3b82f6;--accent3:#06b6d4;
+  --gradient:linear-gradient(135deg,#7c3aed,#3b82f6,#06b6d4);
+  --radius:16px;--radius-lg:24px;--radius-xl:32px;
+  --transition:0.5s cubic-bezier(0.16,1,0.3,1);
+  --transition-fast:0.3s cubic-bezier(0.16,1,0.3,1);
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:'Playfair Display',Georgia,serif;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  font-family:var(--font-sans);background:var(--bg);color:var(--text);
+  line-height:1.6;overflow-x:hidden;cursor:none;
+  -webkit-font-smoothing:antialiased;
+}
+*{cursor:none!important}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--text-dim);border-radius:3px}
+
+/* CURSOR */
+.cursor-dot,.cursor-ring{
+  position:fixed;pointer-events:none;z-index:99999;border-radius:50%;transform:translate(-50%,-50%);
+}
+.cursor-dot{
+  width:6px;height:6px;
+  background:var(--accent1);
+  opacity:0;z-index:100001;
+  box-shadow:0 0 8px rgba(124,58,237,0.4);
+}
+.cursor-ring{
+  width:36px;height:36px;z-index:100000;
+  border:1.5px solid rgba(255,255,255,0.25);
+  opacity:0;
+  transition:width 0.3s,height 0.3s,border-color 0.3s,background 0.3s,box-shadow 0.3s;
+  box-shadow:0 0 15px rgba(124,58,237,0.08);
+}
+.cursor-ring.hover{
+  width:56px;height:56px;
+  border-color:var(--accent2);
+  background:rgba(59,130,246,0.08);
+  box-shadow:0 0 30px rgba(59,130,246,0.15);
+}
+.cursor-ring.click{
+  width:44px;height:44px;
+  border-color:var(--accent1);
+  background:rgba(124,58,237,0.12);
+}
+
+/* NAV */
+nav{
+  position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:1000;
+  width:calc(100% - 48px);max-width:1200px;
+  padding:14px 28px;
+  background:rgba(7,7,13,0.7);backdrop-filter:blur(24px) saturate(1.4);
+  border:1px solid var(--glass-border);border-radius:100px;
+  display:flex;align-items:center;justify-content:space-between;
+  opacity:0;transform:translateX(-50%) translateY(-20px);
+  animation:navIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+}
+@keyframes navIn{to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.nav-logo{font-weight:800;font-size:18px;letter-spacing:-0.5px;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-logo span{font-weight:300;color:var(--text-muted);-webkit-text-fill-color:var(--text-muted)}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.3px;transition:color var(--transition-fast);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--gradient);transition:width var(--transition-fast);border-radius:1px}
+.nav-links a:hover{color:var(--text)}.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after{width:100%}
+.nav-cta{
+  padding:8px 20px;border-radius:100px;
+  background:var(--gradient);color:#fff;text-decoration:none;
+  font-size:13px;font-weight:600;letter-spacing:0.3px;
+  transition:transform var(--transition-fast),box-shadow var(--transition-fast);
+}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(124,58,237,0.3)}
+
+/* HERO */
+.hero{
+  position:relative;min-height:70vh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;padding:160px 24px 80px;
+}
+.hero-bg{position:absolute;inset:0;overflow:hidden;z-index:0}
+.hero-orb{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:0.35;
+  animation:orbFloat 20s ease-in-out infinite;
+}
+.hero-orb:nth-child(1){width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,0.2),transparent 70%);top:-10%;left:-5%}
+.hero-orb:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,rgba(59,130,246,0.15),transparent 70%);bottom:-15%;right:-8%;animation-delay:-7s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-40px) scale(1.05)}50%{transform:translate(-20px,20px) scale(0.95)}75%{transform:translate(40px,30px) scale(1.02)}}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:60px 60px;z-index:1;
+}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:700px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 20px;border-radius:100px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);font-weight:500;
+  margin-bottom:32px;
+  opacity:0;animation:fadeUp 0.8s 0.2s forwards;
+}
+.hero-title{
+  font-family:var(--font-display);font-size:clamp(42px,8vw,100px);font-weight:700;
+  line-height:1;letter-spacing:-2px;margin-bottom:20px;
+  opacity:0;animation:fadeUp 0.8s 0.4s forwards;
+}
+.hero-title .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{
+  font-size:clamp(16px,2vw,22px);color:var(--text-muted);max-width:500px;margin:0 auto;
+  opacity:0;animation:fadeUp 0.8s 0.6s forwards;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* CONTACT SECTION */
+.contact-section{padding:80px 24px 120px}
+.contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.contact-info{padding-top:20px}
+.contact-info-label{
+  font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-bottom:16px;
+  background:var(--glass);padding:6px 16px;border-radius:100px;border:1px solid var(--glass-border);display:inline-block;
+}
+.contact-info-title{
+  font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.15;margin-bottom:20px;letter-spacing:-1px;
+}
+.contact-info-text{font-size:15px;color:var(--text-muted);line-height:1.8;margin-bottom:40px}
+.contact-details{display:flex;flex-direction:column;gap:24px}
+.contact-detail{
+  display:flex;align-items:flex-start;gap:16px;
+  opacity:0;transform:translateY(15px);
+  transition:all 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.contact-detail.visible{opacity:1;transform:translateY(0)}
+.contact-detail-icon{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  background:var(--glass);border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+}
+.contact-detail h4{font-size:14px;font-weight:600;margin-bottom:2px}
+.contact-detail p{font-size:13px;color:var(--text-muted)}
+
+/* FORM */
+.contact-form-wrap{
+  background:var(--surface);border:1px solid var(--glass-border);
+  border-radius:var(--radius-xl);padding:48px 40px;
+  backdrop-filter:blur(16px);
+  opacity:0;transform:translateY(20px);
+  transition:all 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.contact-form-wrap.visible{opacity:1;transform:translateY(0)}
+.contact-form-title{
+  font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:28px;
+}
+.form-group{margin-bottom:20px}
+.form-group label{
+  display:block;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:8px;
+}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:14px 18px;border-radius:var(--radius);
+  background:var(--bg);border:1px solid var(--glass-border);
+  color:var(--text);font-family:var(--font-sans);font-size:14px;
+  transition:border-color var(--transition-fast);
+  outline:none;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--accent2);box-shadow:0 0 0 3px rgba(59,130,246,0.1);
+}
+.form-group textarea{min-height:120px;resize:vertical}
+.form-group select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238888a0' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-submit{
+  width:100%;padding:16px;border-radius:100px;border:none;cursor:pointer;
+  background:var(--gradient);color:#fff;font-family:var(--font-sans);
+  font-size:15px;font-weight:600;letter-spacing:0.5px;
+  transition:all var(--transition-fast);
+}
+.form-submit:hover{transform:scale(1.02);box-shadow:0 0 40px rgba(124,58,237,0.3)}
+
+/* SOCIAL */
+.social-links{display:flex;gap:12px;margin-top:40px;flex-wrap:wrap}
+.social-link{
+  padding:10px 20px;border-radius:100px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  color:var(--text-muted);text-decoration:none;
+  font-size:13px;font-weight:500;transition:all var(--transition-fast);
+}
+.social-link:hover{color:var(--text);border-color:var(--text-dim);transform:translateY(-2px)}
+
+/* CTA */
+.cta{padding:120px 24px;text-align:center;position:relative}
+.cta-inner{max-width:600px;margin:0 auto}
+.cta-title{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.2;margin-bottom:16px}
+.cta-text{font-size:15px;color:var(--text-muted);margin-bottom:0}
+
+/* FOOTER */
+footer{padding:40px 24px;text-align:center;border-top:1px solid var(--glass-border)}
+footer p{font-size:13px;color:var(--text-dim)}
+footer a{color:var(--text-muted);text-decoration:none;transition:color var(--transition-fast)}
+footer a:hover{color:var(--text)}
+
+@media(max-width:900px){
+  .contact-inner{grid-template-columns:1fr;gap:40px}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav{padding:12px 18px;top:16px;width:calc(100% - 32px)}
+  .nav-links{display:none}
+  .hero{padding:120px 20px 60px}
+  .hero-title{font-size:32px}
+  .section{padding:48px 20px}
+  .section-title{font-size:24px}
+  .section-desc{font-size:14px}
+  .filter-bar{gap:6px;margin-bottom:28px}
+  .filter-btn{padding:8px 16px;font-size:12px}
+  .contact-section{padding:40px 20px 80px}
+  .contact-form-wrap{padding:32px 24px}
+  .trust{padding:60px 20px}
+  .cta{padding:60px 20px}
+  .cta-title{font-size:28px}
+  *{cursor:auto!important}
+  body{cursor:auto}
+  .cursor-dot,.cursor-ring{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+
+<nav>
+  <a href="creations.html" class="nav-logo">VortexFlow<span> Media</span></a>
+  <ul class="nav-links">
+    <li><a href="creations.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="works.html">Works</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Start a Project</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-orb"></div>
+    <div class="hero-orb"></div>
+  </div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Get in Touch</div>
+    <h1 class="hero-title">Let's <span class="grad">Talk</span></h1>
+    <p class="hero-sub">Have a project in mind? We'd love to hear about it. Reach out and let's create something extraordinary together.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="contact-info-label">Connect With Us</div>
+      <h2 class="contact-info-title">Tell us about<br>your vision</h2>
+      <p class="contact-info-text">Every great project starts with a conversation. Whether you have a clear brief or just a spark of an idea, we're here to help bring it to life.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉</div>
+          <div>
+            <h4>Email</h4>
+            <p>vortexflowmedia@gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">◎</div>
+          <div>
+            <h4>Location</h4>
+            <p>Available worldwide — remote-first studio</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">⚡</div>
+          <div>
+            <h4>Response Time</h4>
+            <p>Typically within 24 hours</p>
+          </div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://instagram.com/vortexflowmedia" class="social-link">@vortexflowmedia</a>
+      </div>
+    </div>
+    <div class="contact-form-wrap" id="contactForm">
+      <div class="contact-form-title">Send us a message</div>
+      <form id="contactFormElement">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="john@example.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Project Type</label>
+          <select>
+            <option>Video Editing</option>
+            <option>Web Design</option>
+            <option>Brand Identity</option>
+            <option>Thumbnails</option>
+            <option>Motion Design</option>
+            <option>Creative Direction</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Budget Range</label>
+          <select>
+            <option>Under $500</option>
+            <option>$500 – $1,500</option>
+            <option>$1,500 – $5,000</option>
+            <option>$5,000+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Project Details</label>
+          <textarea placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-inner">
+    <h2 class="cta-title">Prefer to start<br>right away?</h2>
+    <p class="cta-text">Check out our services and pricing, or browse our portfolio for inspiration.</p>
+    <div style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="services.html" class="nav-cta" style="padding:14px 36px;font-size:14px">View Services</a>
+      <a href="services.html" class="nav-cta" style="padding:14px 36px;font-size:14px;background:var(--glass);color:var(--text);box-shadow:none;background:linear-gradient(135deg,var(--glass),var(--surface))">View Our Work</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 VortexFlow Media. <a href="creations.html">Home</a> · <a href="services.html">Services</a> · <a href="works.html">Works</a> · <a href="contact.html">Contact</a></p>
+</footer>
+
+<script>
+// CURSOR
+const cDot=document.getElementById('cursorDot');
+const cRing=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cDot.style.opacity='1';cRing.style.opacity='1';
+});
+document.addEventListener('mouseleave',()=>{
+  cDot.style.opacity='0';cRing.style.opacity='0';
+});
+function animCursor(){
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  cDot.style.left=mx+'px';cDot.style.top=my+'px';
+  cRing.style.left=rx+'px';cRing.style.top=ry+'px';
+  requestAnimationFrame(animCursor)
+}
+animCursor();
+document.querySelectorAll('a,button,.filter-btn,.hero-btn,.cta-btn,.nav-cta,.service-card,.tier-card,.project-card,.featured-card,.social-link,.form-submit,.viewer-close,.viewer-arrow,.process-step').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cRing.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>cRing.classList.remove('hover'));
+});
+document.addEventListener('mousedown',()=>cRing.classList.add('click'));
+document.addEventListener('mouseup',()=>cRing.classList.remove('click'));
+
+// SCROLL REVEALS
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.12});
+document.querySelectorAll('.contact-detail,.contact-form-wrap').forEach(el=>observer.observe(el));
+
+// FORM SUBMIT
+document.getElementById('contactFormElement').addEventListener('submit',function(e){e.preventDefault();const btn=this.querySelector('.form-submit');const orig=btn.textContent;btn.textContent='✓ Message Sent!';btn.style.background='linear-gradient(135deg,#06b6d4,#3b82f6)';setTimeout(()=>{btn.textContent=orig;btn.style.background=''},3000)});
+</script>
+</body>
+</html>

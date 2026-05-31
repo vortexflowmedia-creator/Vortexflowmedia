@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works — VortexFlow Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07070d;--bg2:#0b0b14;
+  --surface:rgba(255,255,255,0.04);--surface-hover:rgba(255,255,255,0.08);
+  --glass:rgba(255,255,255,0.06);--glass-border:rgba(255,255,255,0.08);
+  --text:#f0f0f5;--text-muted:#8888a0;--text-dim:#55556a;
+  --accent1:#7c3aed;--accent2:#3b82f6;--accent3:#06b6d4;
+  --gradient:linear-gradient(135deg,#7c3aed,#3b82f6,#06b6d4);
+  --radius:16px;--radius-lg:24px;--radius-xl:32px;
+  --transition:0.5s cubic-bezier(0.16,1,0.3,1);
+  --transition-fast:0.3s cubic-bezier(0.16,1,0.3,1);
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:'Playfair Display',Georgia,serif;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  font-family:var(--font-sans);background:var(--bg);color:var(--text);
+  line-height:1.6;overflow-x:hidden;cursor:none;
+  -webkit-font-smoothing:antialiased;
+}
+*{cursor:none!important}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--text-dim);border-radius:3px}
+
+/* CURSOR */
+.cursor-dot,.cursor-ring{
+  position:fixed;pointer-events:none;z-index:99999;border-radius:50%;transform:translate(-50%,-50%);
+}
+.cursor-dot{
+  width:6px;height:6px;
+  background:var(--accent1);
+  opacity:0;z-index:100001;
+  box-shadow:0 0 8px rgba(124,58,237,0.4);
+}
+.cursor-ring{
+  width:36px;height:36px;z-index:100000;
+  border:1.5px solid rgba(255,255,255,0.25);
+  opacity:0;
+  transition:width 0.3s,height 0.3s,border-color 0.3s,background 0.3s,box-shadow 0.3s;
+  box-shadow:0 0 15px rgba(124,58,237,0.08);
+}
+.cursor-ring.hover{
+  width:56px;height:56px;
+  border-color:var(--accent2);
+  background:rgba(59,130,246,0.08);
+  box-shadow:0 0 30px rgba(59,130,246,0.15);
+}
+.cursor-ring.click{
+  width:44px;height:44px;
+  border-color:var(--accent1);
+  background:rgba(124,58,237,0.12);
+}
+
+nav{
+  position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:1000;
+  width:calc(100% - 48px);max-width:1200px;
+  padding:14px 28px;
+  background:rgba(7,7,13,0.7);backdrop-filter:blur(24px) saturate(1.4);
+  border:1px solid var(--glass-border);border-radius:100px;
+  display:flex;align-items:center;justify-content:space-between;
+  opacity:0;transform:translateX(-50%) translateY(-20px);
+  animation:navIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+}
+@keyframes navIn{to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.nav-logo{font-weight:800;font-size:18px;letter-spacing:-0.5px;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-logo span{font-weight:300;color:var(--text-muted);-webkit-text-fill-color:var(--text-muted)}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.3px;transition:color var(--transition-fast);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--gradient);transition:width var(--transition-fast);border-radius:1px}
+.nav-links a:hover{color:var(--text)}.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after{width:100%}
+.nav-cta{
+  padding:8px 20px;border-radius:100px;
+  background:var(--gradient);color:#fff;text-decoration:none;
+  font-size:13px;font-weight:600;letter-spacing:0.3px;
+  transition:transform var(--transition-fast),box-shadow var(--transition-fast);
+}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(124,58,237,0.3)}
+
+.hero{
+  position:relative;min-height:70vh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;padding:160px 24px 80px;
+}
+.hero-bg{position:absolute;inset:0;overflow:hidden;z-index:0}
+.hero-orb{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:0.35;
+  animation:orbFloat 20s ease-in-out infinite;
+}
+.hero-orb:nth-child(1){width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,0.2),transparent 70%);top:-10%;left:-5%}
+.hero-orb:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,rgba(59,130,246,0.15),transparent 70%);bottom:-15%;right:-8%;animation-delay:-7s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-40px) scale(1.05)}50%{transform:translate(-20px,20px) scale(0.95)}75%{transform:translate(40px,30px) scale(1.02)}}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:60px 60px;z-index:1;
+}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:800px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 20px;border-radius:100px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);font-weight:500;
+  margin-bottom:32px;
+  opacity:0;animation:fadeUp 0.8s 0.2s forwards;
+}
+.hero-title{
+  font-family:var(--font-display);font-size:clamp(42px,8vw,100px);font-weight:700;
+  line-height:1;letter-spacing:-2px;margin-bottom:20px;
+  opacity:0;animation:fadeUp 0.8s 0.4s forwards;
+}
+.hero-title .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{
+  font-size:clamp(16px,2vw,22px);color:var(--text-muted);max-width:500px;margin:0 auto;
+  opacity:0;animation:fadeUp 0.8s 0.6s forwards;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+.section{padding:100px 24px;position:relative}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:56px;opacity:0;transform:translateY(30px);transition:opacity 0.8s,transform 0.8s}
+.section-header.visible{opacity:1;transform:translateY(0)}
+.section-label{
+  display:inline-block;font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--text-muted);font-weight:500;margin-bottom:16px;
+  background:var(--glass);padding:6px 16px;border-radius:100px;border:1px solid var(--glass-border);
+}
+.section-title{font-family:var(--font-display);font-size:clamp(28px,4.5vw,52px);font-weight:700;line-height:1.15;letter-spacing:-1px}
+.section-title .highlight{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-desc{font-size:16px;color:var(--text-muted);max-width:500px;margin:16px auto 0;line-height:1.7}
+
+.filter-bar{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:48px}
+.filter-btn{
+  padding:10px 26px;border-radius:100px;border:none;cursor:pointer;
+  background:var(--glass);color:var(--text-muted);font-family:var(--font-sans);
+  font-size:13px;font-weight:500;letter-spacing:0.3px;
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+  backdrop-filter:blur(12px);border:1px solid var(--glass-border);
+  position:relative;overflow:hidden;
+}
+.filter-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent1),var(--accent2));opacity:0;transition:opacity 0.4s;border-radius:inherit}
+.filter-btn span{position:relative;z-index:1;mix-blend-mode:initial}
+.filter-btn:hover{color:var(--void,#07070d);border-color:transparent;transform:translateY(-2px) scale(1.04);box-shadow:0 0 30px rgba(124,58,237,0.3)}
+.filter-btn.active{color:#fff;border-color:transparent;box-shadow:0 0 30px rgba(124,58,237,0.35)}
+.filter-btn.active::before,.filter-btn:hover::before{opacity:1}
+
+.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.project-card{
+  position:relative;border-radius:var(--radius);overflow:hidden;cursor:pointer;
+  background:var(--surface);border:1px solid var(--glass-border);
+  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+  aspect-ratio:4/3;opacity:0;transform:translateY(30px);
+}
+.project-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.6s,transform 0.6s}
+.project-card.tall{aspect-ratio:3/4;grid-row:span 2}
+.project-card.wide{aspect-ratio:16/9;grid-column:span 2}
+.project-card:hover{transform:scale(1.02);border-color:rgba(124,58,237,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(124,58,237,0.1)}
+.project-card-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.8s cubic-bezier(0.16,1,0.3,1)}
+.project-card:hover .project-card-thumb{transform:scale(1.06)}
+.project-card-glass{position:absolute;inset:0;z-index:2;background:linear-gradient(135deg,rgba(124,58,237,0.05),rgba(59,130,246,0.02));opacity:0;transition:opacity 0.5s;pointer-events:none}
+.project-card:hover .project-card-glass{opacity:1}
+.project-card-shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.04) 45%,rgba(255,255,255,0.06) 50%,transparent 55%);transform:translateX(-100%);transition:transform 0.6s}
+.project-card:hover .project-card-shine{transform:translateX(100%)}
+.project-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,7,13,0.92) 0%,rgba(7,7,13,0.4) 40%,rgba(7,7,13,0.1) 70%,transparent 100%);z-index:1;opacity:0.6;transition:opacity 0.5s}
+.project-card:hover .project-card-overlay{opacity:0.85}
+.project-card-info{position:absolute;bottom:0;left:0;right:0;z-index:4;padding:24px;transform:translateY(8px);transition:transform 0.5s}
+.project-card:hover .project-card-info{transform:translateY(0)}
+.project-card-category{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent3);font-weight:600;margin-bottom:8px;background:rgba(6,182,212,0.1);padding:4px 12px;border-radius:100px;border:1px solid rgba(6,182,212,0.15)}
+.project-card-title{font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:4px;line-height:1.3}
+.project-card-desc{font-size:13px;color:var(--text-muted);line-height:1.5;max-width:90%}
+.project-card-icon{position:absolute;top:20px;right:20px;z-index:4;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(-10px) scale(0.8);transition:all 0.35s;color:var(--text)}
+.project-card:hover .project-card-icon{opacity:1;transform:translateY(0) scale(1)}
+
+.featured-section{padding:100px 24px;position:relative}
+.featured-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;height:1px;background:linear-gradient(90deg,transparent,var(--glass-border),transparent)}
+.featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1200px;margin:0 auto}
+.featured-card{position:relative;border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;border:1px solid var(--glass-border);background:var(--surface);transition:all 0.5s cubic-bezier(0.4,0,0.2,1);opacity:0;transform:translateY(30px)}
+.featured-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.8s,transform 0.8s}
+.featured-card:first-child{grid-column:1/-1;aspect-ratio:21/9}
+.featured-card:nth-child(2){aspect-ratio:4/3}
+.featured-card:nth-child(3){aspect-ratio:4/3}
+.featured-card:hover{transform:scale(1.015);border-color:rgba(124,58,237,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 50px rgba(124,58,237,0.08)}
+.featured-card-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.8s}
+.featured-card:hover .featured-card-thumb{transform:scale(1.05)}
+.featured-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,7,13,0.93) 0%,rgba(7,7,13,0.3) 50%,transparent 100%);z-index:1}
+.featured-card-badge{position:absolute;top:20px;left:20px;z-index:2;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#fff;font-weight:600;background:var(--gradient);padding:6px 14px;border-radius:100px;box-shadow:0 4px 20px rgba(124,58,237,0.3)}
+.featured-card-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:28px}
+.featured-card-info h3{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:4px}
+.featured-card-info p{font-size:14px;color:var(--text-muted);max-width:80%}
+
+.trust{padding:100px 24px;text-align:center;position:relative;overflow:hidden}
+.trust::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.06),transparent 70%);pointer-events:none}
+.trust-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
+.trust-quote{font-family:var(--font-display);font-size:clamp(24px,3vw,38px);font-weight:700;line-height:1.3;margin-bottom:48px}
+.trust-quote .highlight{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.trust-metrics{display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
+.trust-metric{text-align:center}
+.trust-metric-num{font-size:32px;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.trust-metric-label{font-size:12px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+
+.cta{padding:120px 24px;text-align:center;position:relative}
+.cta-inner{max-width:600px;margin:0 auto;position:relative;z-index:1}
+.cta-title{font-family:var(--font-display);font-size:clamp(32px,4.5vw,56px);font-weight:700;line-height:1.1;margin-bottom:16px}
+.cta-text{font-size:16px;color:var(--text-muted);margin-bottom:36px}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:16px 40px;border-radius:100px;border:none;cursor:pointer;
+  background:var(--gradient);color:#fff;font-family:var(--font-sans);
+  font-size:15px;font-weight:600;letter-spacing:0.5px;text-decoration:none;
+  transition:all var(--transition-fast);
+}
+.cta-btn:hover{transform:scale(1.04);box-shadow:0 0 50px rgba(124,58,237,0.3)}
+.cta-btn-arrow{transition:transform var(--transition-fast)}
+.cta-btn:hover .cta-btn-arrow{transform:translateX(4px)}
+
+.viewer{position:fixed;inset:0;z-index:10000;background:rgba(7,7,13,0.95);backdrop-filter:blur(40px) saturate(1.5);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity 0.5s,visibility 0.5s}
+.viewer.open{opacity:1;visibility:visible}
+.viewer.active{opacity:1;visibility:visible}
+.viewer-content{max-width:90vw;max-height:90vh;position:relative;transform:scale(0.9);transition:transform 0.6s cubic-bezier(0.16,1,0.3,1)}
+.viewer.active .viewer-content{transform:scale(1)}
+.viewer-media{max-width:100%;max-height:85vh;border-radius:var(--radius-lg);object-fit:contain;box-shadow:0 40px 120px rgba(0,0,0,0.6)}
+.viewer-close{position:absolute;top:24px;right:24px;z-index:10001;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast);backdrop-filter:blur(12px)}
+.viewer-close:hover{background:rgba(255,255,255,0.12);transform:scale(1.08);box-shadow:0 0 30px rgba(124,58,237,0.2)}
+.viewer-controls{position:absolute;inset:0;z-index:10001;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:24px}
+.viewer-arrow{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;pointer-events:auto;background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);color:var(--text);font-size:18px;display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast);opacity:0;transform:scale(0.8)}
+.viewer.active .viewer-arrow{opacity:1;transform:scale(1)}
+.viewer-arrow:hover{background:rgba(255,255,255,0.12);transform:scale(1.1);box-shadow:0 0 25px rgba(124,58,237,0.15)}
+.viewer-counter{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:10001;font-size:12px;letter-spacing:2px;color:var(--text-muted);font-weight:500;background:rgba(0,0,0,0.4);backdrop-filter:blur(12px);padding:8px 20px;border-radius:100px;border:1px solid var(--glass-border)}
+
+footer{padding:40px 24px;text-align:center;border-top:1px solid var(--glass-border)}
+footer p{font-size:13px;color:var(--text-dim)}
+footer a{color:var(--text-muted);text-decoration:none;transition:color var(--transition-fast)}
+footer a:hover{color:var(--text)}
+
+@media(max-width:1024px){.project-grid{grid-template-columns:repeat(2,1fr)}.project-card.tall,.project-card.wide{grid-column:span 1;aspect-ratio:4/3}}
+@media(max-width:768px){
+  nav{padding:12px 18px;top:16px;width:calc(100% - 32px)}
+  .nav-links{display:none}
+  .hero{padding:120px 20px 60px}.hero-title{font-size:32px}
+  .section{padding:48px 20px}
+  .section-title{font-size:24px}
+  .section-desc{font-size:14px}
+  .filter-bar{gap:6px;margin-bottom:28px}
+  .filter-btn{padding:8px 16px;font-size:12px}
+  .project-grid{grid-template-columns:1fr;gap:16px}.project-card.tall,.project-card.wide{grid-column:span 1;aspect-ratio:4/3}
+  .featured-grid{grid-template-columns:1fr}
+  .featured-card:first-child{aspect-ratio:16/9}.featured-card:nth-child(2),.featured-card:nth-child(3){aspect-ratio:16/9}
+  .viewer-arrow{width:40px;height:40px;font-size:14px}
+  .trust{padding:60px 20px}
+  .trust-metrics{gap:24px}
+  .cta{padding:60px 20px}
+  .cta-title{font-size:28px}
+  *{cursor:auto!important}
+  body{cursor:auto}
+  .cursor-dot,.cursor-ring{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+
+<nav>
+  <a href="creations.html" class="nav-logo">VortexFlow<span> Media</span></a>
+  <ul class="nav-links">
+    <li><a href="creations.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="works.html" class="active">Works</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Start a Project</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-orb"></div>
+    <div class="hero-orb"></div>
+  </div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Works Done</div>
+    <h1 class="hero-title">Our <span class="grad">Portfolio</span></h1>
+    <p class="hero-sub">A curated selection of projects we've delivered — each one crafted with precision and purpose.</p>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header" id="showcaseHeader">
+      <div class="section-label">Filter by</div>
+      <h2 class="section-title">Explore our <span class="highlight">Work</span></h2>
+      <p class="section-desc">Browse through our latest projects across different categories.</p>
+    </div>
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all"><span>All Work</span></button>
+      <button class="filter-btn" data-filter="video"><span>Video Editing</span></button>
+      <button class="filter-btn" data-filter="web"><span>Websites</span></button>
+      <button class="filter-btn" data-filter="thumb"><span>Thumbnails</span></button>
+      <button class="filter-btn" data-filter="logo"><span>Logos</span></button>
+      <button class="filter-btn" data-filter="creative"><span>Creative Work</span></button>
+    </div>
+    <div class="project-grid" id="projectGrid"></div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured-section" id="featured">
+  <div class="section-inner">
+    <div class="section-header" id="featuredHeader">
+      <div class="section-label">Flagship</div>
+      <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+      <p class="section-desc">Our most ambitious work — projects that pushed boundaries and set new standards.</p>
+    </div>
+    <div class="featured-grid" id="featuredGrid"></div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="trust-inner">
+    <div class="trust-quote">Crafted with <span class="highlight">precision</span>.<br>Designed to <span class="highlight">stand out</span>.</div>
+    <div class="trust-metrics">
+      <div class="trust-metric"><div class="trust-metric-num">15+</div><div class="trust-metric-label">Projects Done</div></div>
+      <div class="trust-metric"><div class="trust-metric-num">98%</div><div class="trust-metric-label">Client Satisfaction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-inner">
+    <h2 class="cta-title">Have a project<br>in mind?</h2>
+    <p class="cta-text">Let's create something extraordinary together. We'd love to hear about your vision.</p>
+    <a href="contact.html" class="cta-btn">
+      Start Your Project
+      <span class="cta-btn-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- VIEWER -->
+<div class="viewer" id="viewer">
+  <button class="viewer-close" id="viewerClose">✕</button>
+  <div class="viewer-controls">
+    <button class="viewer-arrow" id="viewerPrev">‹</button>
+    <button class="viewer-arrow" id="viewerNext">›</button>
+  </div>
+  <div class="viewer-content">
+    <img class="viewer-media" id="viewerMedia" src="" alt="">
+  </div>
+  <div class="viewer-counter" id="viewerCounter"></div>
+</div>
+
+<footer>
+  <p>&copy; 2026 VortexFlow Media. <a href="creations.html">Home</a> · <a href="services.html">Services</a> · <a href="works.html">Works</a> · <a href="contact.html">Contact</a></p>
+</footer>
+
+<script>
+// CURSOR
+const cDot=document.getElementById('cursorDot');
+const cRing=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cDot.style.opacity='1';cRing.style.opacity='1';
+});
+document.addEventListener('mouseleave',()=>{
+  cDot.style.opacity='0';cRing.style.opacity='0';
+});
+function animCursor(){
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  cDot.style.left=mx+'px';cDot.style.top=my+'px';
+  cRing.style.left=rx+'px';cRing.style.top=ry+'px';
+  requestAnimationFrame(animCursor)
+}
+animCursor();
+document.querySelectorAll('a,button,.filter-btn,.hero-btn,.cta-btn,.nav-cta,.service-card,.tier-card,.project-card,.featured-card,.social-link,.form-submit,.viewer-close,.viewer-arrow,.process-step').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cRing.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>cRing.classList.remove('hover'));
+});
+document.addEventListener('mousedown',()=>cRing.classList.add('click'));
+document.addEventListener('mouseup',()=>cRing.classList.remove('click'));
+
+const projects=[
+  {id:1,title:"Neo Pulse",desc:"High-energy brand film for a tech launch",category:"video",img:"https://picsum.photos/seed/neopulse/800/600"},
+  {id:2,title:"Lumina SaaS",desc:"Clean, conversion-focused dashboard design",category:"web",img:"https://picsum.photos/seed/lumina/800/600",tall:true},
+  {id:3,title:"Apex Legends Thumbnail",desc:"Cinematic gaming thumbnail with bold typography",category:"thumb",img:"https://picsum.photos/seed/apexthumb/600/800",tall:true},
+  {id:4,title:"Vertex Brand Identity",desc:"Minimalist logo system for a modern startup",category:"logo",img:"https://picsum.photos/seed/vertex/800/600"},
+  {id:5,title:"Dreamscape",desc:"Surreal visual art for a music campaign",category:"creative",img:"https://picsum.photos/seed/dreamscape/800/600",wide:true},
+  {id:6,title:"Quantum Edit",desc:"Fast-paced cinematic edit for a product reveal",category:"video",img:"https://picsum.photos/seed/quantum/800/600"},
+  {id:7,title:"EcoCore Web",desc:"Sustainable brand platform with interactive storytelling",category:"web",img:"https://picsum.photos/seed/ecocore/800/600",wide:true},
+  {id:8,title:"Velocity Thumbnail",desc:"High-impact YouTube thumbnail with motion blur",category:"thumb",img:"https://picsum.photos/seed/velocity/600/800",tall:true},
+  {id:9,title:"Orbit Logo",desc:"Geometric logo with dynamic negative space",category:"logo",img:"https://picsum.photos/seed/orbit/800/600"},
+  {id:10,title:"Synthwave Dreams",desc:"Retro-futuristic digital art collection",category:"creative",img:"https://picsum.photos/seed/synthwave/800/600",tall:true},
+  {id:11,title:"Cascade Films",desc:"Cinematic wedding highlight reel",category:"video",img:"https://picsum.photos/seed/cascade/800/600"},
+  {id:12,title:"Prism Agency",desc:"Bold agency website with immersive interactions",category:"web",img:"https://picsum.photos/seed/prism/800/600"},
+];
+const featuredProjects=[
+  {id:101,title:"Horizon Brand Film",desc:"A cinematic brand story for a luxury travel company",img:"https://picsum.photos/seed/horizon/1600/900"},
+  {id:102,title:"Pixel Perfect — E-Commerce",desc:"Full-featured e-commerce with 3x conversion uplift",img:"https://picsum.photos/seed/pixelperfect/1200/900"},
+  {id:103,title:"Aurora Creative Suite",desc:"Complete brand ecosystem for a design-forward agency",img:"https://picsum.photos/seed/aurora/1200/900"},
+];
+
+function renderProjects(filter='all'){
+  const grid=document.getElementById('projectGrid');
+  const filtered=filter==='all'?projects:projects.filter(p=>p.category===filter);
+  grid.innerHTML='';
+  filtered.forEach((p,i)=>{
+    const card=document.createElement('div');
+    card.className='project-card';
+    if(p.tall)card.classList.add('tall');
+    if(p.wide)card.classList.add('wide');
+    card.dataset.id=p.id;
+    card.style.transitionDelay=`${i*0.05}s`;
+    card.innerHTML=`
+      <img class="project-card-thumb" src="${p.img}" alt="${p.title}" loading="lazy">
+      <div class="project-card-glass"></div><div class="project-card-shine"></div><div class="project-card-overlay"></div>
+      <div class="project-card-info">
+        <div class="project-card-category">${({video:'Video Editing',web:'Websites',thumb:'Thumbnails',logo:'Logos',creative:'Creative Work'})[p.category]||p.category}</div>
+        <h3 class="project-card-title">${p.title}</h3>
+        <p class="project-card-desc">${p.desc}</p>
+      </div>
+      <div class="project-card-icon">→</div>`;
+    card.addEventListener('click',()=>openViewer(p.id,filter));
+    grid.appendChild(card);
+    requestAnimationFrame(()=>setTimeout(()=>card.classList.add('visible'),i*60));
+  });
+}
+
+function renderFeatured(){
+  const grid=document.getElementById('featuredGrid');
+  featuredProjects.forEach((p,i)=>{
+    const card=document.createElement('div');
+    card.className='featured-card';
+    card.style.transitionDelay=`${i*0.15}s`;
+    card.innerHTML=`
+      <img class="featured-card-thumb" src="${p.img}" alt="${p.title}" loading="lazy">
+      <div class="featured-card-overlay"></div>
+      <div class="featured-card-badge">Featured Project</div>
+      <div class="featured-card-info"><h3>${p.title}</h3><p>${p.desc}</p></div>`;
+    card.addEventListener('click',()=>openViewer(p.id,'featured'));
+    grid.appendChild(card);
+  });
+  const fObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');fObs.unobserve(e.target)}})},{threshold:0.15});
+  document.querySelectorAll('.featured-card').forEach(c=>fObs.observe(c));
+}
+
+let viewerItems=[],viewerIndex=0;
+function openViewer(id,filter){
+  viewerItems=filter==='featured'?featuredProjects:(document.querySelector('.filter-btn.active')?.dataset?.filter==='all'?projects:projects.filter(p=>p.category===(document.querySelector('.filter-btn.active')?.dataset?.filter||'all')));
+  viewerIndex=viewerItems.findIndex(p=>p.id===id);
+  if(viewerIndex===-1)viewerIndex=0;
+  document.getElementById('viewerMedia').src=viewerItems[viewerIndex].img;
+  document.getElementById('viewerCounter').textContent=`${viewerIndex+1} / ${viewerItems.length}`;
+  const v=document.getElementById('viewer');v.classList.add('open');
+  requestAnimationFrame(()=>v.classList.add('active'));
+  document.body.style.overflow='hidden';
+}
+function closeViewer(){const v=document.getElementById('viewer');v.classList.remove('active');setTimeout(()=>v.classList.remove('open'),500);document.body.style.overflow=''}
+function prevViewer(){viewerIndex=(viewerIndex-1+viewerItems.length)%viewerItems.length;document.getElementById('viewerMedia').src=viewerItems[viewerIndex].img;document.getElementById('viewerCounter').textContent=`${viewerIndex+1} / ${viewerItems.length}`}
+function nextViewer(){viewerIndex=(viewerIndex+1)%viewerItems.length;document.getElementById('viewerMedia').src=viewerItems[viewerIndex].img;document.getElementById('viewerCounter').textContent=`${viewerIndex+1} / ${viewerItems.length}`}
+document.getElementById('viewerClose').addEventListener('click',closeViewer);
+document.getElementById('viewerPrev').addEventListener('click',prevViewer);
+document.getElementById('viewerNext').addEventListener('click',nextViewer);
+document.getElementById('viewer').addEventListener('click',e=>{if(e.target===e.currentTarget)closeViewer()});
+document.addEventListener('keydown',e=>{if(!document.getElementById('viewer').classList.contains('active'))return;if(e.key==='Escape')closeViewer();if(e.key==='ArrowLeft')prevViewer();if(e.key==='ArrowRight')nextViewer()});
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{btn.addEventListener('click',function(){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');renderProjects(this.dataset.filter)})});
+
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+document.querySelectorAll('.section-header,.project-card').forEach(el=>obs.observe(el));
+
+renderProjects('all');
+renderFeatured();
+</script>
+</body>
+</html>
