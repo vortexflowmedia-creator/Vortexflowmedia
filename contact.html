@@ -425,8 +425,9 @@ document.querySelectorAll('a,button,.filter-btn,.hero-btn,.cta-btn,.nav-cta,.ser
 });
 document.addEventListener('mousedown',()=>cRing.classList.add('click'));
 document.addEventListener('mouseup',()=>cRing.classList.remove('click'));
-document.getElementById('navHamburger').addEventListener('click',function(){document.querySelector('.nav-links').classList.toggle('open')});
+document.getElementById('navHamburger').addEventListener('click',function(e){e.stopPropagation();document.querySelector('.nav-links').classList.toggle('open')});
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));
+document.addEventListener('click',function(e){if(!e.target.closest('nav'))document.querySelector('.nav-links').classList.remove('open')});
 
 // SCROLL REVEALS
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.12});
