@@ -28,9 +28,9 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 *{cursor:none!important}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--text-dim);border-radius:3px}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
 
 /* CURSOR */
 .cursor-dot,.cursor-ring{
@@ -88,6 +88,9 @@ nav{
   transition:transform var(--transition-fast),box-shadow var(--transition-fast);
 }
 .nav-cta:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(124,58,237,0.3)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.nav-hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
 
 /* HERO */
 .hero{
@@ -140,21 +143,34 @@ nav{
   font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.15;margin-bottom:20px;letter-spacing:-1px;
 }
 .contact-info-text{font-size:15px;color:var(--text-muted);line-height:1.8;margin-bottom:40px}
-.contact-details{display:flex;flex-direction:column;gap:24px}
+.contact-details{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.contact-info-heading{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-bottom:4px}
 .contact-detail{
-  display:flex;align-items:flex-start;gap:16px;
-  opacity:0;transform:translateY(15px);
-  transition:all 0.6s cubic-bezier(0.16,1,0.3,1);
+  display:flex;align-items:center;gap:12px;
+  padding:12px 24px;border-radius:100px;
+  background:var(--surface);border:1.5px solid var(--glass-border);
+  cursor:pointer;user-select:none;text-decoration:none;
+  opacity:0;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
 }
-.contact-detail.visible{opacity:1;transform:translateY(0)}
+.contact-detail.visible{opacity:1}
+.contact-detail:hover{border-color:var(--accent2);background:var(--surface-hover)}
 .contact-detail-icon{
-  width:44px;height:44px;border-radius:50%;flex-shrink:0;
-  background:var(--glass);border:1px solid var(--glass-border);
+  width:36px;height:36px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-size:16px;
+  font-size:18px;color:var(--text);
 }
-.contact-detail h4{font-size:14px;font-weight:600;margin-bottom:2px}
-.contact-detail p{font-size:13px;color:var(--text-muted)}
+.contact-detail h4{font-size:14px;font-weight:600;color:var(--text);margin:0}
+.contact-detail p{font-size:13px;color:var(--text-muted);margin:0}
+.phone-row{
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  padding:4px 10px;border-radius:50px;font-size:13px;color:var(--text-muted);
+  transition:all 0.3s;
+}
+.phone-row:hover{background:var(--glass);color:var(--text)}
+.copy-badge{
+  font-size:11px;color:var(--text-dim);transition:color 0.3s;display:flex;align-items:center;
+}
+.phone-row:hover .copy-badge{color:var(--accent2)}
 
 /* FORM */
 .contact-form-wrap{
@@ -222,7 +238,12 @@ footer a:hover{color:var(--text)}
 }
 @media(max-width:768px){
   nav{padding:12px 18px;top:16px;width:calc(100% - 32px)}
-  .nav-links{display:none}
+  .nav-links{display:none;position:fixed;top:80px;left:16px;right:16px;flex-direction:column;background:rgba(7,7,13,0.95);backdrop-filter:blur(24px);border:1px solid var(--glass-border);border-radius:16px;padding:16px;gap:4px;z-index:999}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 16px;border-radius:12px}
+  .nav-links a::after{display:none}
+  .nav-links a:hover{background:var(--surface)}
+  .nav-hamburger{display:flex!important}
   .hero{padding:120px 20px 60px}
   .hero-title{font-size:32px}
   .section{padding:48px 20px}
@@ -255,7 +276,10 @@ footer a:hover{color:var(--text)}
     <li><a href="works.html">Works</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
-  <a href="contact.html" class="nav-cta">Start a Project</a>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">Start a Project</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -273,37 +297,45 @@ footer a:hover{color:var(--text)}
 </section>
 
 <!-- CONTACT -->
-<section class="contact-section">
+<section class="contact-section" id="contact-section">
   <div class="contact-inner">
     <div class="contact-info">
       <div class="contact-info-label">Connect With Us</div>
       <h2 class="contact-info-title">Tell us about<br>your vision</h2>
       <p class="contact-info-text">Every great project starts with a conversation. Whether you have a clear brief or just a spark of an idea, we're here to help bring it to life.</p>
       <div class="contact-details">
-        <div class="contact-detail">
+        <div class="contact-info-heading">Contact Info</div>
+        <div class="contact-detail" style="cursor:default;flex-wrap:wrap;padding:12px 24px 12px 12px;gap:6px">
+          <div class="contact-detail-icon">📞</div>
+          <h4 style="align-self:flex-start;margin-top:8px">Phone</h4>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div class="phone-row" onclick="copyText(this,'+91 7815880701')">
+              <span>+91 7815880701 (SRIVASTAV)</span>
+              <span class="copy-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+            </div>
+            <div class="phone-row" onclick="copyText(this,'+91 9848477588')">
+              <span>+91 9848477588 (UDDISH)</span>
+              <span class="copy-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-detail" onclick="copyEmail(this)">
           <div class="contact-detail-icon">✉</div>
-          <div>
-            <h4>Email</h4>
-            <p>vortexflowmedia@gmail.com</p>
-          </div>
+          <h4>Email</h4>
+          <p>vortexflowmedia@gmail.com</p>
         </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">◎</div>
-          <div>
-            <h4>Location</h4>
-            <p>Available worldwide — remote-first studio</p>
+        <a href="https://instagram.com/vortexflowmedia" target="_blank" rel="noopener noreferrer" class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
           </div>
-        </div>
-        <div class="contact-detail">
+          <h4>Instagram</h4>
+          <p>@vortexflowmedia</p>
+        </a>
+        <div class="contact-detail" style="cursor:default">
           <div class="contact-detail-icon">⚡</div>
-          <div>
-            <h4>Response Time</h4>
-            <p>Typically within 24 hours</p>
-          </div>
+          <h4>Response</h4>
+          <p>Within 24h</p>
         </div>
-      </div>
-      <div class="social-links">
-        <a href="https://instagram.com/vortexflowmedia" class="social-link">@vortexflowmedia</a>
       </div>
     </div>
     <div class="contact-form-wrap" id="contactForm">
@@ -322,22 +354,21 @@ footer a:hover{color:var(--text)}
         <div class="form-group">
           <label>Project Type</label>
           <select>
+            <option>Web Design &amp; Website Creation</option>
             <option>Video Editing</option>
-            <option>Web Design</option>
-            <option>Brand Identity</option>
-            <option>Thumbnails</option>
-            <option>Motion Design</option>
-            <option>Creative Direction</option>
+            <option>Creative Writing &amp; Editing</option>
+            <option>Thumbnail Design</option>
+            <option>Logo Design</option>
+            <option>Social Media Design</option>
             <option>Other</option>
           </select>
         </div>
         <div class="form-group">
           <label>Budget Range</label>
           <select>
-            <option>Under $500</option>
-            <option>$500 – $1,500</option>
-            <option>$1,500 – $5,000</option>
-            <option>$5,000+</option>
+            <option>Under ₹500</option>
+            <option>₹500 – ₹1,499</option>
+            <option>₹1,500 – ₹2,999</option>
             <option>Not sure yet</option>
           </select>
         </div>
@@ -358,7 +389,7 @@ footer a:hover{color:var(--text)}
     <p class="cta-text">Check out our services and pricing, or browse our portfolio for inspiration.</p>
     <div style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
       <a href="services.html" class="nav-cta" style="padding:14px 36px;font-size:14px">View Services</a>
-      <a href="services.html" class="nav-cta" style="padding:14px 36px;font-size:14px;background:var(--glass);color:var(--text);box-shadow:none;background:linear-gradient(135deg,var(--glass),var(--surface))">View Our Work</a>
+      <a href="works.html" class="nav-cta" style="padding:14px 36px;font-size:14px;background:var(--glass);color:var(--text);box-shadow:none;background:linear-gradient(135deg,var(--glass),var(--surface))">View Our Work</a>
     </div>
   </div>
 </section>
@@ -392,13 +423,26 @@ document.querySelectorAll('a,button,.filter-btn,.hero-btn,.cta-btn,.nav-cta,.ser
 });
 document.addEventListener('mousedown',()=>cRing.classList.add('click'));
 document.addEventListener('mouseup',()=>cRing.classList.remove('click'));
+document.getElementById('navHamburger').addEventListener('click',function(){document.querySelector('.nav-links').classList.toggle('open')});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));
 
 // SCROLL REVEALS
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.12});
 document.querySelectorAll('.contact-detail,.contact-form-wrap').forEach(el=>observer.observe(el));
 
+// COPY
+function copyText(el,txt){
+  navigator.clipboard.writeText(txt);
+  const orig=el.innerHTML;
+  el.innerHTML='<span style="color:var(--accent3);font-weight:600;font-size:13px">✓ Copied</span>';
+  setTimeout(()=>{el.innerHTML=orig},1500);
+}
+function copyEmail(el){copyText(el,'vortexflowmedia@gmail.com')}
+
 // FORM SUBMIT
 document.getElementById('contactFormElement').addEventListener('submit',function(e){e.preventDefault();const btn=this.querySelector('.form-submit');const orig=btn.textContent;btn.textContent='✓ Message Sent!';btn.style.background='linear-gradient(135deg,#06b6d4,#3b82f6)';setTimeout(()=>{btn.textContent=orig;btn.style.background=''},3000)});
+
+setTimeout(()=>{const t=document.querySelector('.contact-info-label');if(t){const y=t.getBoundingClientRect().top+window.scrollY-100,n=y-window.scrollY,d=750,s=Date.now();!function f(){const p=Math.min((Date.now()-s)/d,1),e=p<.5?4*p*p*p:(p-1)*(2*p-2)*(2*p-2)+1;window.scrollTo(0,window.scrollY+n*e);p<1&&requestAnimationFrame(f)}()}},600)
 </script>
 </body>
 </html>
