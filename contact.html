@@ -445,7 +445,7 @@ function copyEmail(el){copyText(el,'vortexflowmedia@gmail.com')}
 
 // FORM SUBMIT — EMAILJS
 (function(){emailjs.init('Qcmbtuh_3qGfcuHcu')})();
-document.getElementById('contactFormElement').addEventListener('submit',function(e){e.preventDefault();const btn=this.querySelector('.form-submit');const orig=btn.textContent;btn.textContent='Sending...';btn.disabled=true;const f=this;emailjs.sendForm('service_fusimo5','template_lc4xrfy',f).then(()=>emailjs.sendForm('service_fusimo5','template_nljfxxm',f)).then(()=>{btn.textContent='✓ Message Sent!';btn.style.background='linear-gradient(135deg,#06b6d4,#3b82f6)';setTimeout(()=>{btn.textContent=orig;btn.style.background='';btn.disabled=false},3000)},()=>{btn.textContent='✗ Failed';btn.style.background='#ef4444';setTimeout(()=>{btn.textContent=orig;btn.style.background='';btn.disabled=false},3000)})});
+document.getElementById('contactFormElement').addEventListener('submit',function(e){e.preventDefault();const btn=this.querySelector('.form-submit');const orig=btn.textContent;btn.textContent='Sending...';btn.disabled=true;emailjs.sendForm('service_fusimo5','template_lc4xrfy',this).then(()=>{btn.textContent='✓ Message Sent!';btn.style.background='linear-gradient(135deg,#06b6d4,#3b82f6)';setTimeout(()=>{btn.textContent=orig;btn.style.background='';btn.disabled=false},3000)},()=>{btn.textContent='✗ Failed';btn.style.background='#ef4444';setTimeout(()=>{btn.textContent=orig;btn.style.background='';btn.disabled=false},3000)})});
 
 setTimeout(()=>{const el=document.querySelector('.contact-info-label');if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-100,behavior:'smooth'})},800)
 </script>
