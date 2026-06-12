@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rate Cards — VortexFlow Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#07070d;padding:40px;display:flex;flex-direction:column;align-items:center;gap:40px;font-family:'Inter',sans-serif}
+
+.card{
+  width:720px;height:900px;
+  border-radius:0;overflow:hidden;
+  position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  background:linear-gradient(145deg,#0b0b14,#0f0f1a);
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 0 80px rgba(124,58,237,0.04);
+  padding:60px;
+}
+
+.card::before{
+  content:'';position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,0.1),transparent 70%);
+  top:-15%;right:-10%;pointer-events:none;
+}
+.card::after{
+  content:'';position:absolute;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,246,0.06),transparent 70%);
+  bottom:-10%;left:-10%;pointer-events:none;
+}
+
+.badge{
+  font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:#55556a;font-weight:600;margin-bottom:24px;
+  background:rgba(255,255,255,0.04);padding:8px 20px;border-radius:100px;
+  border:1px solid rgba(255,255,255,0.06);z-index:1;
+}
+
+.service-number{
+  font-family:'Bebas Neue',sans-serif;font-size:80px;line-height:1;
+  background:linear-gradient(135deg,#7c3aed,#3b82f6,#06b6d4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;opacity:0.12;position:absolute;top:40px;left:40px;
+  z-index:0;letter-spacing:4px;
+}
+
+.service-name{
+  font-family:'Playfair Display',serif;font-size:40px;font-weight:700;
+  color:#f0f0f5;text-align:center;line-height:1.15;z-index:1;
+  margin-bottom:12px;letter-spacing:-0.5px;
+}
+
+.service-desc{
+  font-size:14px;color:#8888a0;text-align:center;
+  max-width:450px;margin-bottom:28px;z-index:1;line-height:1.5;
+}
+
+.price-box{
+  display:flex;align-items:baseline;justify-content:center;gap:6px;z-index:1;
+}
+
+.price{
+  font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;
+  background:linear-gradient(135deg,#7c3aed,#3b82f6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;letter-spacing:1px;
+}
+
+.price-label{
+  font-family:'Inter',sans-serif;font-size:12px;color:#55556a;
+  text-transform:uppercase;letter-spacing:2px;font-weight:500;
+}
+
+.features{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin-top:28px;z-index:1;max-width:500px;
+}
+
+.features span{
+  font-size:11px;color:#8888a0;letter-spacing:0.3px;
+  padding:6px 14px;border-radius:100px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+.footer-brand{
+  position:absolute;bottom:36px;z-index:1;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  background:linear-gradient(135deg,#7c3aed,#3b82f6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;font-weight:700;
+}
+
+.footer-line{
+  position:absolute;bottom:60px;
+  width:50px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
+}
+</style>
+</head>
+<body>
+
+<!-- 01 -->
+<div class="card">
+  <div class="badge">VortexFlow Media</div>
+  <div class="service-number">01</div>
+  <div class="service-name">Web Design &amp;<br>Website Creation</div>
+  <div class="service-desc">Modern, responsive, UI-focused websites built for brands that demand the best.</div>
+  <div class="price-box">
+    <div class="price">₹999</div>
+    <div class="price-label">Starting</div>
+  </div>
+  <div class="features">
+    <span>Business Websites</span>
+    <span>Portfolio Websites</span>
+    <span>Landing Pages</span>
+    <span>Premium Modern Websites</span>
+    <span>Responsive Design</span>
+    <span>UI-focused Design</span>
+    <span>Custom Creation</span>
+  </div>
+  <div class="footer-brand">VortexFlow Media</div>
+  <div style="position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(124,58,237,0.06);bottom:-40px;right:-40px;pointer-events:none"></div>
+  <div style="position:absolute;width:140px;height:140px;border-radius:50%;border:1px solid rgba(59,130,246,0.06);top:-30px;left:-30px;pointer-events:none"></div>
+</div>
+
+<!-- 02 -->
+<div class="card">
+  <div class="badge">VortexFlow Media</div>
+  <div class="service-number">02</div>
+  <div class="service-name">Video Editing</div>
+  <div class="service-desc">Professional video editing for creators, brands, and businesses — short &amp; long-form.</div>
+  <div class="price-box">
+    <div class="price">₹499</div>
+    <div class="price-label">Starting</div>
+  </div>
+  <div class="features">
+    <span>Long-form Editing</span>
+    <span>Short-form Editing</span>
+    <span>Social Media Editing</span>
+    <span>Cinematic Editing</span>
+    <span>Content Editing</span>
+    <span>Brand Video Editing</span>
+  </div>
+  <div class="footer-brand">VortexFlow Media</div>
+  <div style="position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(124,58,237,0.06);bottom:-40px;right:-40px;pointer-events:none"></div>
+  <div style="position:absolute;width:140px;height:140px;border-radius:50%;border:1px solid rgba(59,130,246,0.06);top:-30px;left:-30px;pointer-events:none"></div>
+</div>
+
+<!-- 03 -->
+<div class="card">
+  <div class="badge">VortexFlow Media</div>
+  <div class="service-number">03</div>
+  <div class="service-name">Creative Writing<br>&amp; Editing</div>
+  <div class="service-desc">Words that captivate. Editing that refines. Content that connects.</div>
+  <div class="price-box">
+    <div class="price">₹299</div>
+    <div class="price-label">Starting</div>
+  </div>
+  <div class="features">
+    <span>Blog Writing</span>
+    <span>Content Writing</span>
+    <span>Creative Writing</span>
+    <span>Editing &amp; Refining</span>
+    <span>Digital Content</span>
+    <span>Creative Solutions</span>
+  </div>
+  <div class="footer-brand">VortexFlow Media</div>
+  <div style="position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(124,58,237,0.06);bottom:-40px;right:-40px;pointer-events:none"></div>
+  <div style="position:absolute;width:140px;height:140px;border-radius:50%;border:1px solid rgba(59,130,246,0.06);top:-30px;left:-30px;pointer-events:none"></div>
+</div>
+
+<!-- 04 -->
+<div class="card">
+  <div class="badge">VortexFlow Media</div>
+  <div class="service-number">04</div>
+  <div class="service-name">Thumbnail Design</div>
+  <div class="service-desc">High-impact thumbnails that stop the scroll and drive clicks.</div>
+  <div class="price-box">
+    <div class="price">₹99</div>
+    <div class="price-label">Per Piece</div>
+  </div>
+  <div class="features">
+    <span>YouTube Thumbnails</span>
+    <span>Instagram Thumbnails</span>
+  </div>
+  <div class="footer-brand">VortexFlow Media</div>
+  <div style="position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(124,58,237,0.06);bottom:-40px;right:-40px;pointer-events:none"></div>
+  <div style="position:absolute;width:140px;height:140px;border-radius:50%;border:1px solid rgba(59,130,246,0.06);top:-30px;left:-30px;pointer-events:none"></div>
+</div>
+
+<!-- 05 -->
+<div class="card">
+  <div class="badge">VortexFlow Media</div>
+  <div class="service-number">05</div>
+  <div class="service-name">Logo Design</div>
+  <div class="service-desc">Distinctive logos that define your brand identity — minimal to bold.</div>
+  <div class="price-box">
+    <div class="price">₹99</div>
+    <div class="price-label">Per Piece</div>
+  </div>
+  <div class="features">
+    <span>Minimal Logos</span>
+    <span>Modern Logos</span>
+    <span>Luxury Logos</span>
+    <span>Gaming Logos</span>
+    <span>Business Logos</span>
+    <span>Mascot Logos</span>
+    <span>Custom Designs</span>
+  </div>
+  <div class="footer-brand">VortexFlow Media</div>
+  <div style="position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(124,58,237,0.06);bottom:-40px;right:-40px;pointer-events:none"></div>
+  <div style="position:absolute;width:140px;height:140px;border-radius:50%;border:1px solid rgba(59,130,246,0.06);top:-30px;left:-30px;pointer-events:none"></div>
+</div>
+
+<!-- 06 -->
+<div class="card">
+  <div class="badge">VortexFlow Media</div>
+  <div class="service-number">06</div>
+  <div class="service-name">Social Media<br>Design</div>
+  <div class="service-desc">Scroll-stopping social creatives that elevate your brand presence.</div>
+  <div class="price-box">
+    <div class="price">₹199</div>
+    <div class="price-label">Starting</div>
+  </div>
+  <div class="features">
+    <span>Instagram Posts</span>
+    <span>Social Creatives</span>
+    <span>Promotional Designs</span>
+    <span>Brand Visual Content</span>
+  </div>
+  <div class="footer-brand">VortexFlow Media</div>
+  <div style="position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(124,58,237,0.06);bottom:-40px;right:-40px;pointer-events:none"></div>
+  <div style="position:absolute;width:140px;height:140px;border-radius:50%;border:1px solid rgba(59,130,246,0.06);top:-30px;left:-30px;pointer-events:none"></div>
+</div>
+
+<!-- 07 — Premium Combo -->
+<div class="card" style="border-color:rgba(124,58,237,0.15);background:linear-gradient(145deg,#0b0b14,#100e1a)">
+  <div class="badge" style="border-color:rgba(124,58,237,0.2);color:#7c3aed">Featured</div>
+  <div class="service-number">✦</div>
+  <div class="service-name" style="font-size:36px">Custom Project</div>
+  <div class="service-desc">Tell us your vision — we'll craft the perfect solution and quote accordingly.</div>
+  <div class="price-box">
+    <div class="price" style="font-size:60px;background:linear-gradient(135deg,#7c3aed,#06b6d4);-webkit-background-clip:text;background-clip:text">Let's Talk</div>
+  </div>
+  <div class="features">
+    <span>Tailored Solutions</span>
+    <span>Premium Quality</span>
+    <span>Dedicated Support</span>
+    <span>Fast Delivery</span>
+  </div>
+  <div class="footer-brand">VortexFlow Media</div>
+  <div style="position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid rgba(124,58,237,0.06);bottom:-40px;right:-40px;pointer-events:none"></div>
+  <div style="position:absolute;width:140px;height:140px;border-radius:50%;border:1px solid rgba(59,130,246,0.06);top:-30px;left:-30px;pointer-events:none"></div>
+</div>
+
+</body>
+</html>
